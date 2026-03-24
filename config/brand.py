@@ -21,4 +21,7 @@ class Config:
     TOP_MARGIN = 0.5
     
     SENSOR_DATA = [27, 29, 30, 28, 31, 26, 27, 29, 30, 28, 31, 26, 27, 29, 30, 28, 31, 26]  
+<<<<<<< HEAD
     CONTACTS = ["Abinav", "Bipul", "Diya", "Kritan", "Nir", "Rohan", "Safal"]
+=======
+>>>>>>> origin/main
