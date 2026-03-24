@@ -144,8 +144,41 @@ def bullet_definition(scene: Scene, definition: str, font_size: int = 32, overla
     return VGroup(big_circle, def_grp)
 
 
+def boxed_array(scene: Scene, data: list):
+    preview = data[:5]
 
-def animate_array_declaration(scene: Scene, data: list, header):
+    CELL_W, CELL_H = 2.5, 0.7  
+    PADDING = 0.20
+
+    boxes = VGroup()
+
+    for item in preview:
+        # outer box
+        rect = Rectangle(
+            width=CELL_W,
+            height=CELL_H,
+            stroke_color=Config.PRIMARY_HIGHLIGHT,
+            fill_color=Config.SECONDARY_ACCENT,
+            fill_opacity=0.8,
+        )
+
+        txt = Tex(str(item), font_size=24, color=Config.PRIMARY_HIGHLIGHT)
+
+        # left alignment of text inside the box
+        txt.align_to(rect.get_left() + RIGHT * PADDING, LEFT)
+        txt.move_to([txt.get_x(), rect.get_center()[1], 0])
+
+        # group
+        element = VGroup(rect, txt)
+        boxes.add(element)
+
+    boxes.arrange(DOWN, buff=0)
+    boxes.move_to(ORIGIN)
+
+    return boxes
+
+
+def animate_array_declaration(scene: Scene, data: list):
     preview = data[:5]
     vals_str = ', '.join(str(v) for v in preview) + ', ...'
 
@@ -162,7 +195,7 @@ def animate_array_declaration(scene: Scene, data: list, header):
     return line
 
 
-def animate_array_memory(scene: Scene, data: list, header, position=ORIGIN):
+def animate_array_memory(scene: Scene, data: list, position=ORIGIN):
     CELL_W, CELL_H = 1.3, 0.55
     BASE_ADDR, STEP = 100, 4
     preview = data[:5]
