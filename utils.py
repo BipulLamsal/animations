@@ -144,7 +144,6 @@ def bullet_definition(scene: Scene, definition: str, font_size: int = 32, overla
     return VGroup(big_circle, def_grp)
 
 
-<<<<<<< HEAD
 def boxed_array(scene: Scene, data: list):
     preview = data[:5]
 
@@ -180,10 +179,6 @@ def boxed_array(scene: Scene, data: list):
 
 
 def animate_array_declaration(scene: Scene, data: list):
-=======
-
-def animate_array_declaration(scene: Scene, data: list, header):
->>>>>>> origin/main
     preview = data[:5]
     vals_str = ', '.join(str(v) for v in preview) + ', ...'
 
@@ -200,11 +195,7 @@ def animate_array_declaration(scene: Scene, data: list, header):
     return line
 
 
-<<<<<<< HEAD
 def animate_array_memory(scene: Scene, data: list, position=ORIGIN):
-=======
-def animate_array_memory(scene: Scene, data: list, header, position=ORIGIN):
->>>>>>> origin/main
     CELL_W, CELL_H = 1.3, 0.55
     BASE_ADDR, STEP = 100, 4
     preview = data[:5]
