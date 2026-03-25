@@ -8,29 +8,21 @@ def centered_text_animation(scene: Scene, content: str,
                              font_size: int = 40,
                              wrap_width: int = 40,
                              wait_time: float = 2.0,
-                             run_time: float=3.0):
-   
+                             run_time: float = 3.0):
     lines = textwrap.wrap(content, width=wrap_width)
-
-    txt = Tex(
-        *lines, # here we are unpacking the list in comma so tex handles each line as sep arg
-        font_size=font_size, 
-        
-        color=Config.PRIMARY_HIGHLIGHT,
-        tex_environment=None  # this prevents the default centering of the entire block, allowing us to center each line individually in manim way
-    )
-    # arrange the text downwards with short padding of 0.20 b/w lines
-    txt.arrange(DOWN, center=True, buff=0.20)
-
-    txt.move_to(ORIGIN)
-
-    # overwrite the default animation runtime 
-    scene.play(Write(txt, run_time=run_time))
+ 
+    group = VGroup(*[
+        Tex(line, font_size=font_size, color=Config.PRIMARY_HIGHLIGHT)
+        for line in lines
+    ])
+ 
+    group.arrange(DOWN, center=True, buff=0.20)
+    group.move_to(ORIGIN)
+ 
+    scene.play(Write(group, run_time=run_time))
     scene.wait(wait_time)
-    scene.play(FadeOut(txt))
-
-    return txt
-
+    scene.play(FadeOut(group))
+    return group
 
 def create_header(label_text, font_size: int = 32,):
     header_text = MathTex(label_text, color=Config.PRIMARY_HIGHLIGHT, font_size=font_size)
@@ -145,7 +137,7 @@ def bullet_definition(scene: Scene, definition: str, font_size: int = 32, overla
 
 
 def boxed_array(scene: Scene, data: list):
-    preview = data[:5]
+    preview = data[:]
 
     CELL_W, CELL_H = 2.5, 0.7  
     PADDING = 0.20

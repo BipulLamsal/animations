@@ -97,4 +97,6 @@ class Introduction(Scene):
 
         definition = r"An \textbf{Array} is a data structure that stores a collection of elements, typically of the same type, in contiguous memory locations. It allows for efficient access and manipulation of data using an index."
         utils.bullet_definition(self, definition, overlay=overlay)
-        self.wait()
+        self.wait(duration=3.0)
+        utils.cleanup(self)
+        

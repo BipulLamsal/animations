@@ -11,13 +11,13 @@ class Significance(Scene):
         horiz_div   = DashedLine(LEFT * 6.5, RIGHT * 6.5,
                                  color=GRAY_E, stroke_width=1).move_to(ORIGIN)
         mem_header  = Tex(r"\textbf{Memory}", font_size=24,
-                          color=Config.PRIMARY_HIGHLIGHT).move_to(ORIGIN + DOWN * 0.3)
+                          color=Config.PRIMARY_HIGHLIGHT).move_to(ORIGIN + DOWN * 0.6)
 
         self.play(FadeIn(code_header), FadeIn(horiz_div))
-        utils.animate_array_declaration(self, sensor_data, code_header)
+        utils.animate_array_declaration(self, sensor_data)
 
         self.play(FadeIn(mem_header))
-        cells = utils.animate_array_memory(self, sensor_data, mem_header)
+        cells = utils.animate_array_memory(self, sensor_data, position=mem_header.get_bottom() + DOWN * 0.6)    
 
         self.wait(0.8)
 
@@ -36,7 +36,6 @@ class Significance(Scene):
             self.play(cell.animate.set_stroke(color=Config.PRIMARY_HIGHLIGHT, width=1.5), run_time=0.3)
 
         self.wait(0.5)
-        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.6)
         
         # cleanup
         utils.cleanup(self)

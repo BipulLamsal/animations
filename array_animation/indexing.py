@@ -5,7 +5,7 @@ import utils
 class Indexing(Scene):
     def construct(self):
         sensor_data = Config.SENSOR_DATA[:5]
-        cells = utils.animate_array_memory(self, sensor_data, None, position=ORIGIN)
+        cells = utils.animate_array_memory(self, sensor_data)
         self.wait(0.4)
         
         utils.show_note(self, r"An array name \textbf{temp} is just a pointer to the first element meaning the memory location of first element of array is same as the memory location of the array itself")
@@ -23,7 +23,7 @@ class Indexing(Scene):
         ptr_label.next_to(arrow.get_start(), UP, buff=0.15)
 
         self.play(Create(arrow), FadeIn(ptr_label), run_time=0.5)
-        cells[0][0].set_stroke(color=YELLOW, width=3)
+        cells[0][0].set_stroke(color=Config.SECONDARY_ACCENT, width=3)
         utils.show_note(self, rf"$100 + 0 \times 4 = 100$ $\rightarrow$ {sensor_data[0]}")
         self.wait(0.2)
 
@@ -36,7 +36,7 @@ class Indexing(Scene):
             self.play(
                 arrow.animate.shift(RIGHT * shift_x),
                 Transform(ptr_label, new_label),
-                cells[i][0].animate.set_stroke(color=YELLOW, width=3),
+                cells[i][0].animate.set_stroke(color=Config.SECONDARY_ACCENT, width=3),
                 cells[i-1][0].animate.set_stroke(color=Config.PRIMARY_HIGHLIGHT, width=1.5),
                 run_time=0.55
             )
